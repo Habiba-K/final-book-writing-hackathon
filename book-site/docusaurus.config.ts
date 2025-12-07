@@ -15,13 +15,13 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://your-username.github.io',
+  url: 'https:/final-book-writing-hackathon.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/book-writing-hackathon/',
 
   // GitHub pages deployment config.
-  organizationName: 'your-username', // Usually your GitHub org/user name.
+  organizationName: 'Habiba-K', // Usually your GitHub org/user name.
   projectName: 'book-writing-hackathon', // Usually your repo name.
 
   onBrokenLinks: 'throw',
