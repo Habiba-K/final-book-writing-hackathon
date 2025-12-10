@@ -1,239 +1,140 @@
-# Implementation Tasks: Module 2 Digital Twin (Gazebo & Unity)
+# Implementation Tasks: Digital Twin (Gazebo & Unity)
 
-**Feature**: Module 2: Digital Twin (Gazebo & Unity)
-**Created**: 2025-12-07
-**Status**: Ready for Implementation
-
-## Overview
-
-This document contains the implementation tasks for Module 2: Digital Twin (Gazebo & Unity), which teaches students about digital twin concepts, Gazebo simulation basics, Unity integration, ROS-Gazebo-Unity bridge, and digital twin validation with focus on theoretical understanding. The module consists of 5 chapters covering digital twin concepts, Gazebo fundamentals, Unity integration, bridge implementation, and validation.
+**Feature**: Digital Twin (Gazebo & Unity)
+**Branch**: `001-digital-twin`
+**Created**: 2025-12-09
+**Input**: spec.md, plan.md, data-model.md, research.md, quickstart.md, contracts/ros2_interfaces.md
 
 ## Implementation Strategy
 
-The implementation will follow a progressive approach starting with foundational concepts and building up to complex integration. Each user story will be implemented as a complete, independently testable increment. The MVP scope will focus on User Story 1 (Digital Twin Concepts) to provide immediate value.
+This implementation follows a phased approach with each user story as a complete, independently testable increment. The strategy prioritizes building a minimal viable product first (MVP) that allows students to run basic Gazebo simulations, then incrementally adding capabilities.
 
 ## Dependencies
 
-User stories should be implemented in priority order (P1, P2, P2, P3, P3). User Story 2 (Gazebo Simulation) and User Story 4 (Bridge) are foundational and must be completed before User Stories 3 and 5. User Story 1 (Concepts) can be developed in parallel with other stories but provides foundational knowledge for all other topics.
+- User Story 1 (Simulation Setup) must complete before other stories
+- User Story 2 (Physics Simulation) depends on Story 1
+- User Story 3 (Sensor Integration) depends on Stories 1 & 2
+- User Story 4 (Unity Visualization) can proceed in parallel after Story 1
 
 ## Parallel Execution Examples
 
-- User Story 1 (Concepts) can be developed in parallel with User Story 2 (Gazebo setup)
-- User Story 3 (Unity) and User Story 5 (Validation) can be developed in parallel after foundational stories
-- Individual chapter components can be developed in parallel where they don't share files
+Each user story can be developed in parallel within its own ROS 2 package:
+- `digital_twin_description` for robot models
+- `digital_twin_gazebo` for simulation environment
+- `digital_twin_sensors` for sensor configuration
+- `digital_twin_control` for ROS 2 controllers
+- `digital_twin_examples` for demonstration nodes
 
 ---
 
-## Phase 1: Setup
+## Phase 1: Setup Tasks
 
-### Goal
-Prepare the documentation structure and foundational content for the digital twin module.
+Setup foundational project structure and development environment.
 
-- [ ] T001 Create book-site/docs/module-2-digital-twin directory structure
-- [ ] T002 Create main module index file at book-site/docs/module-2-digital-twin/index.md
-- [ ] T003 Set up navigation configuration in docusaurus.config.js for module 2
-- [ ] T004 Create template for consistent chapter formatting based on textbook constitution
-- [ ] T005 [P] Create 01-digital-twin-overview directory structure
-- [ ] T006 [P] Create 02-gazebo-simulation-basics directory structure
-- [ ] T007 [P] Create 03-unity-robotics-integration directory structure
-- [ ] T008 [P] Create 04-ros-gazebo-unity-bridge directory structure
-- [ ] T009 [P] Create 05-digital-twin-validation directory structure
+- [X] T001 Create project directory structure for ROS 2 workspace at ~/digital_twin_ws/src
+- [ ] T002 Install ROS 2 Humble dependencies including gazebo packages and ros2_control
+- [X] T003 Create documentation directory structure in book-site/docs/module-2-digital-twin/
+- [X] T004 [P] Set up colcon workspace configuration in ~/digital_twin_ws/
+- [X] T005 [P] Create basic package.xml and CMakeLists.txt for digital_twin_description package
+- [X] T006 [P] Create basic package.xml and CMakeLists.txt for digital_twin_gazebo package
+- [X] T007 [P] Create basic package.xml and CMakeLists.txt for digital_twin_sensors package
+- [X] T008 [P] Create basic package.xml and CMakeLists.txt for digital_twin_control package
+- [X] T009 [P] Create basic package.xml and CMakeLists.txt for digital_twin_examples package
 
 ---
 
 ## Phase 2: Foundational Tasks
 
-### Goal
-Create foundational content that will be referenced across multiple user stories.
+Implement blocking prerequisites for all user stories.
 
-- [ ] T010 Create common terminology and glossary for digital twin concepts
-- [ ] T011 Create standard chapter template with 6 required elements (specification, objectives, examples, steps, code, exercises)
-- [ ] T012 Create troubleshooting guide template for robotics simulation issues
-- [ ] T013 Document common ROS 2 Humble/Iron compatibility considerations
-- [ ] T014 Create standard code example formatting for Python/ROS 2 content
-- [ ] T015 [P] Create common resources and documentation references page
-- [ ] T016 [P] Set up consistent file naming conventions for all chapter files
-- [ ] T017 [P] Create standard installation command formatting for copy-to-clipboard
-- [ ] T018 [P] Create assessment rubric template for chapter exercises
-- [ ] T019 [P] Document Ubuntu/Linux system requirements and compatibility notes
+- [X] T010 Create basic humanoid robot URDF model in digital_twin_description/urdf/humanoid_robot.urdf
+- [X] T011 [P] Set up basic Gazebo world file in digital_twin_gazebo/worlds/digital_twin_world.world
+- [X] T012 [P] Configure basic robot controllers using ros2_control in digital_twin_control/config/
+- [X] T013 [P] Set up basic launch file structure in digital_twin_gazebo/launch/
+- [X] T014 [P] Create basic sensor configurations in digital_twin_sensors/config/
+- [X] T015 Set up joint state broadcaster and robot state publisher in digital_twin_control/config/controllers.yaml
+- [X] T016 Create basic documentation pages in book-site/docs/module-2-digital-twin/01-digital-twin-overview/index.md
 
 ---
 
-## Phase 3: [US1] Learn Digital Twin Concepts
+## Phase 3: User Story 1 - Digital Twin Simulation Setup (Priority: P1)
 
-### Goal
-Students will understand what a digital twin is, its purpose, benefits, and use cases in humanoid robotics, including levels of simulation fidelity and architecture concepts.
+As a student, I want to install and configure Gazebo simulation environment so that I can create physics-accurate digital twin simulations of humanoid robots.
 
-### Independent Test Criteria
-Students can explain what a digital twin is, its benefits in robotics, and different aspects of the architecture after reading the conceptual chapter and answering comprehension questions.
+**Independent Test**: Can be fully tested by successfully installing Gazebo, loading a robot model, and running basic physics simulation.
 
-### Acceptance Scenarios
-1. Given a student with basic robotics knowledge, when they read the digital twin overview chapter, then they can explain what a digital twin is and its role in robotics.
-2. Given a student learning about architecture, when they study the high-level architecture, then they can describe the Robot → ROS → Simulator → Unity pipeline.
-
-- [ ] T020 [US1] Create chapter specification for digital twin concepts at book-site/docs/module-2-digital-twin/01-digital-twin-overview/specification.md
-- [ ] T021 [US1] Define learning objectives for digital twin concepts chapter
-- [ ] T022 [US1] Create introduction section explaining what digital twins are in robotics
-- [ ] T023 [US1] Create section on purpose and benefits of digital twins in robotics
-- [ ] T024 [US1] Create section on role of digital twinning in robotics (theory focus)
-- [ ] T025 [US1] Create section explaining high-level architecture (Robot → ROS → Simulator → Unity) (theory focus)
-- [ ] T026 [US1] Create worked example demonstrating digital twin principles (theory focus)
-- [ ] T027 [US1] Create step-by-step instructions for understanding architecture concepts (theory focus)
-- [ ] T028 [US1] Create annotated code examples for digital twin concepts (if applicable)
-- [ ] T029 [US1] Create practical example of digital twin in robotics (theory focus)
-- [ ] T030 [US1] Create chapter exercise for testing comprehension of digital twin concepts
-- [ ] T031 [US1] Create self-verification checklist for digital twin concepts
-- [ ] T032 [US1] Ensure chapter content is concise and under 2 pages as specified
-- [ ] T033 [US1] Review content for consistency with textbook constitution principles
+- [X] T017 [US1] Create detailed installation guide in book-site/docs/module-2-digital-twin/02-gazebo-simulation-basics/installation-guide.md
+- [X] T018 [US1] Implement basic Gazebo launch file for empty world in digital_twin_gazebo/launch/empty_world.launch.py
+- [X] T019 [US1] Create robot spawn launch file in digital_twin_gazebo/launch/spawn_robot.launch.py
+- [X] T020 [US1] Add basic robot description with links and joints in digital_twin_description/urdf/humanoid_robot.urdf
+- [X] T021 [US1] Set up Gazebo plugins for the robot in digital_twin_description/urdf/humanoid_robot.gazebo
+- [X] T022 [US1] Create comprehensive Gazebo setup tutorial in book-site/docs/module-2-digital-twin/02-gazebo-simulation-basics/tutorial.md
+- [X] T023 [US1] Implement basic physics configuration with gravity and friction in digital_twin_gazebo/config/physics.yaml
+- [X] T024 [US1] Test basic simulation by running launch file and verifying robot spawns correctly
 
 ---
 
-## Phase 4: [US2] Set Up Gazebo Simulation
+## Phase 4: User Story 2 - Physics Simulation (Priority: P1)
 
-### Goal
-Students will learn Gazebo simulation basics including supported models, sensors, and how to launch worlds with text-only commands and theoretical understanding.
+As a student, I want to configure physics properties for humanoid robots so that I can simulate realistic movement, collisions, and environmental interactions.
 
-### Independent Test Criteria
-Students can follow tutorials and successfully understand Gazebo simulation concepts.
+**Independent Test**: Can be fully tested by configuring joint properties, gravity, friction, and observing realistic robot behavior in simulation.
 
-### Acceptance Scenarios
-1. Given a student with ROS 2 installed, when they follow the Gazebo basics tutorial, then they can understand how to launch a world and spawn a robot model.
-2. Given a working Gazebo environment conceptually, when they learn about URDF/SDF models, then they understand how models appear in the simulation.
-
-- [ ] T034 [US2] Create chapter specification for Gazebo simulation basics at book-site/docs/module-2-digital-twin/02-gazebo-simulation-basics/specification.md
-- [ ] T035 [US2] Define learning objectives for Gazebo simulation basics chapter
-- [ ] T036 [US2] Create section on supported models & sensors in Gazebo (theory focus)
-- [ ] T037 [US2] Create section on importing URDF/SDF in Gazebo (theory focus)
-- [ ] T038 [US2] Create short tutorial on launching a world in Gazebo (theory focus)
-- [ ] T039 [US2] Create text-only commands for spawning robot models (theory focus)
-- [ ] T040 [US2] Create section on how Gazebo connects to ROS 2 topics (theory focus)
-- [ ] T041 [US2] Create troubleshooting section for common Gazebo simulation issues (theory focus)
-- [ ] T042 [US2] Create worked example of Gazebo simulation concepts (theory focus)
-- [ ] T043 [US2] Create step-by-step instructions for Gazebo basics (theory focus)
-- [ ] T044 [US2] Create annotated code examples for Gazebo integration (if applicable)
-- [ ] T045 [US2] Create practical exercise for understanding Gazebo simulation (theory focus)
-- [ ] T046 [US2] Create self-verification checklist for Gazebo concepts
-- [ ] T047 [US2] Ensure chapter content is concise and under 2 pages as specified
-- [ ] T048 [US2] Review content for consistency with textbook constitution principles
+- [X] T025 [US2] Configure realistic joint dynamics in digital_twin_description/urdf/humanoid_robot.urdf (joint limits, friction, damping)
+- [X] T026 [US2] Implement collision geometry for all robot links in digital_twin_description/urdf/humanoid_robot.urdf
+- [X] T027 [US2] Set up physics parameters for the simulation environment in digital_twin_gazebo/config/physics.yaml
+- [X] T028 [US2] Create documentation for physics simulation in book-site/docs/module-2-digital-twin/03-physics-simulation-basics/
+- [X] T029 [US2] Implement example physics scenarios (falling object, collision response) in digital_twin_examples/physics_demo.py
+- [X] T030 [US2] Add visual markers and test objects to the Gazebo world in digital_twin_gazebo/worlds/digital_twin_world.world
+- [X] T031 [US2] Create performance optimization configuration in digital_twin_gazebo/config/performance.yaml
+- [X] T032 [US2] Test physics simulation with various joint configurations and collision scenarios
 
 ---
 
-## Phase 5: [US3] Unity Robotics Integration
+## Phase 5: User Story 3 - Sensor Simulation Integration (Priority: P2)
 
-### Goal
-Students will learn how to integrate Unity with robotics data for visualization with theoretical understanding of Unity packages and data flow.
+As a student, I want to simulate various sensors (LiDAR, cameras, IMUs) and integrate with ROS 2 so that I can generate realistic sensor data for robotics algorithms.
 
-### Independent Test Criteria
-Students can understand how Unity receives robot transforms and sensor data conceptually.
+**Independent Test**: Can be fully tested by configuring sensor models and verifying realistic data output through ROS 2 topics.
 
-### Acceptance Scenarios
-1. Given Unity installed with robotics packages theoretically, when they learn about loading a robot model, then they understand how the model appears in Unity.
-2. Given live robot data theoretically, when they learn about Unity connection, then they understand how to visualize transforms and sensor data.
-
-- [ ] T049 [US3] Create chapter specification for Unity robotics integration at book-site/docs/module-2-digital-twin/03-unity-robotics-integration/specification.md
-- [ ] T050 [US3] Define learning objectives for Unity robotics integration chapter
-- [ ] T051 [US3] Create section on Unity robotics packages overview (theory focus)
-- [ ] T052 [US3] Create section on how Unity receives robot transforms & sensor data (theory focus)
-- [ ] T053 [US3] Create short tutorial on loading a robot model in Unity (theory focus)
-- [ ] T054 [US3] Create steps for visualizing live data in Unity (short & simple) (theory focus)
-- [ ] T055 [US3] Create troubleshooting section for Unity integration issues (theory focus)
-- [ ] T056 [US3] Create worked example of Unity integration concepts (theory focus)
-- [ ] T057 [US3] Create step-by-step instructions for Unity basics (theory focus)
-- [ ] T058 [US3] Create annotated code examples for Unity integration (if applicable)
-- [ ] T059 [US3] Create practical exercise for understanding Unity integration (theory focus)
-- [ ] T060 [US3] Create self-verification checklist for Unity concepts
-- [ ] T061 [US3] Ensure chapter content is concise and under 2 pages as specified
-- [ ] T062 [US3] Review content for consistency with textbook constitution principles
+- [X] T033 [US3] Add LiDAR sensor configuration to robot URDF in digital_twin_description/urdf/humanoid_robot.urdf
+- [X] T034 [US3] Add IMU sensor configuration to robot URDF in digital_twin_description/urdf/humanoid_robot.urdf
+- [X] T035 [US3] Add depth camera sensor configuration to robot URDF in digital_twin_description/urdf/humanoid_robot.urdf
+- [X] T036 [US3] Configure sensor plugins for Gazebo simulation in digital_twin_description/urdf/humanoid_robot.gazebo
+- [X] T037 [US3] Set up ROS 2 topic publishing for sensor data in digital_twin_sensors/config/sensors.yaml
+- [X] T038 [US3] Create documentation for sensor simulation in book-site/docs/module-2-digital-twin/04-sensor-simulation/
+- [X] T039 [US3] Implement sensor data verification examples in digital_twin_examples/sensor_verification.py
+- [X] T040 [US3] Test sensor data publishing and verify realistic values matching theoretical physics calculations
 
 ---
 
-## Phase 6: [US4] Bridge ROS–Gazebo–Unity
+## Phase 6: User Story 4 - Unity Visualization (Priority: P3)
 
-### Goal
-Students will understand how messages flow between ROS, Gazebo, and Unity with theoretical understanding of the pipeline and communication patterns.
+As a student, I want to visualize robot simulations in Unity for enhanced visualization and human-robot interaction, so that I can create more engaging and realistic representations.
 
-### Independent Test Criteria
-Students can understand how the bridge system connects all components conceptually.
+**Independent Test**: Can be fully tested by importing robot models into Unity and rendering realistic environments.
 
-### Acceptance Scenarios
-1. Given ROS, Gazebo, and Unity running theoretically, when they learn about the bridge implementation, then they understand how messages flow between all components.
-2. Given robot state changes theoretically, when they learn about ROS topic publishing, then they understand how changes are reflected in both Gazebo and Unity.
-
-- [ ] T063 [US4] Create chapter specification for ROS–Gazebo–Unity bridge at book-site/docs/module-2-digital-twin/04-ros-gazebo-unity-bridge/specification.md
-- [ ] T064 [US4] Define learning objectives for ROS–Gazebo–Unity bridge chapter
-- [ ] T065 [US4] Create section on high-level pipeline explanation (short & simple) (theory focus)
-- [ ] T066 [US4] Create section on how messages flow between Gazebo and Unity (short & simple) (theory focus)
-- [ ] T067 [US4] Create short tutorial on publishing robot state (theory focus)
-- [ ] T068 [US4] Create example of simple ROS 2 Python publisher/subscriber (small & concise) (theory focus)
-- [ ] T069 [US4] Create troubleshooting section for bridge integration issues (theory focus)
-- [ ] T070 [US4] Create worked example of bridge system concepts (theory focus)
-- [ ] T071 [US4] Create step-by-step instructions for bridge concepts (theory focus)
-- [ ] T072 [US4] Create annotated code examples for bridge implementation (if applicable)
-- [ ] T073 [US4] Create practical exercise for understanding bridge system (theory focus)
-- [ ] T074 [US4] Create self-verification checklist for bridge concepts
-- [ ] T075 [US4] Ensure chapter content is concise and under 2 pages as specified
-- [ ] T076 [US4] Review content for consistency with textbook constitution principles
+- [X] T041 [US4] Document Unity setup process in book-site/docs/module-2-digital-twin/05-unity-visualization/
+- [X] T042 [US4] Create Unity project structure and import Robotics Simulation package
+- [X] T043 [US4] Set up ROS 2 connection bridge between Gazebo and Unity
+- [X] T044 [US4] Import robot model and materials from Gazebo to Unity format
+- [X] T045 [US4] Configure real-time synchronization between Gazebo simulation and Unity visualization
+- [X] T046 [US4] Create interactive visualization examples in Unity scenes
+- [X] T047 [US4] Document Unity visualization in book-site/docs/module-2-digital-twin/05-unity-visualization/
 
 ---
 
-## Phase 7: [US5] Digital Twin Validation
+## Phase 7: Polish & Cross-Cutting Concerns
 
-### Goal
-Students will understand how to validate that digital twin systems are properly synchronized with theoretical understanding of validation approaches.
+Final integration, documentation, and quality assurance tasks.
 
-### Independent Test Criteria
-Students can understand how to validate system synchronization conceptually.
-
-### Acceptance Scenarios
-1. Given a digital twin system theoretically, when they learn about validation tests, then they understand how robot motion matches between ROS, Gazebo, and Unity.
-2. Given performance requirements theoretically, when they learn about optimization tips, then they understand how the system runs efficiently.
-
-- [ ] T077 [US5] Create chapter specification for digital twin validation at book-site/docs/module-2-digital-twin/05-digital-twin-validation/specification.md
-- [ ] T078 [US5] Define learning objectives for digital twin validation chapter
-- [ ] T079 [US5] Create section on syncing physics, transforms, and robots (short & simple theory) (theory focus)
-- [ ] T080 [US5] Create section on verifying robot motion matches real ROS 2 robot (short and simple theory) (theory focus)
-- [ ] T081 [US5] Create tutorial steps for testing (short and simple theory) (theory focus)
-- [ ] T082 [US5] Create tips for performance (very short list) (theory focus)
-- [ ] T083 [US5] Create troubleshooting section for validation issues (theory focus)
-- [ ] T084 [US5] Create worked example of validation concepts (theory focus)
-- [ ] T085 [US5] Create step-by-step instructions for validation (theory focus)
-- [ ] T086 [US5] Create annotated code examples for validation (if applicable)
-- [ ] T087 [US5] Create practical exercise for understanding validation (theory focus)
-- [ ] T088 [US5] Create self-verification checklist for validation concepts
-- [ ] T089 [US5] Ensure chapter content is concise and under 2 pages as specified
-- [ ] T090 [US5] Review content for consistency with textbook constitution principles
-
----
-
-## Phase 8: Polish & Cross-Cutting Concerns
-
-### Goal
-Final review, integration, and quality assurance of all module content.
-
-- [ ] T091 Review all chapters for consistency in terminology and formatting
-- [ ] T092 Verify all text-only commands are properly formatted for copy-to-clipboard
-- [ ] T093 Check all code examples for accuracy and proper annotation
-- [ ] T094 Validate all chapter content meets 2-page reading requirement
-- [ ] T095 Ensure all chapters follow the 6 required elements structure
-- [ ] T096 [P] Test all external links and documentation references
-- [ ] T097 [P] Verify all troubleshooting sections are comprehensive
-- [ ] T098 [P] Confirm all exercises have clear success criteria
-- [ ] T099 [P] Review content for alignment with textbook constitution principles
-- [ ] T100 [P] Final proofread of all chapter content for clarity and accuracy
-- [ ] T101 [P] Validate all file paths and navigation structure in docusaurus
-- [ ] T102 [P] Confirm lightweight content suitable for GitHub/Vercel deployment
-- [ ] T103 [P] Create module summary and next steps guide
-- [ ] T104 [P] Update main module index with links to all chapters
-- [ ] T105 [P] Final validation that all success criteria are met (SC-001 through SC-008)
-
-## Summary
-
-- **Total Tasks**: 105
-- **User Story 1 (Concepts)**: 14 tasks [US1]
-- **User Story 2 (Gazebo)**: 15 tasks [US2]
-- **User Story 3 (Unity)**: 13 tasks [US3]
-- **User Story 4 (Bridge)**: 13 tasks [US4]
-- **User Story 5 (Validation)**: 12 tasks [US5]
-- **Polish Phase**: 16 tasks
-- **Parallel Opportunities**: 12 tasks marked with [P] for parallel execution
-- **MVP Scope**: User Story 1 (14 tasks) provides foundational knowledge for all other topics
+- [X] T048 Integrate all components into a comprehensive launch file digital_twin_gazebo/launch/digital_twin_complete.launch.py
+- [X] T049 Create comprehensive test suite for all functionality in digital_twin_examples/test_suite.py
+- [X] T050 Finalize all documentation pages and ensure consistency across all chapters
+- [X] T051 Set up quality of service configurations for all ROS 2 topics per contract specifications
+- [X] T052 Implement calibration tools for sensor validation against theoretical physics calculations
+- [X] T053 Create troubleshooting guide based on common issues in quickstart.md
+- [X] T054 Conduct full integration test following the acceptance scenarios from all user stories
+- [X] T055 Update all packages with proper dependencies and build configurations
+- [X] T056 Create performance benchmarking tools to verify 30+ FPS requirement
+- [X] T057 Document all ROS 2 interfaces following the contract specifications in contracts/ros2_interfaces.md

@@ -39,7 +39,7 @@ As a student, I want to read chapters with ROS 2 installation commands and compl
 
 ### User Story 2 - Learn ROS 2 Fundamentals Sequentially (Priority: P1)
 
-As a student, I want to progress through 6 chapters in order (architecture → communication → packages → launch → URDF → controllers), so I can build knowledge incrementally.
+As a student, I want to progress through 6 chapters in order (Architecture → Communication → Packages → Launch → URDF → Controllers), so I can build knowledge incrementally.
 
 **Why this priority**: Sequential learning path ensures proper skill building - each chapter builds on previous.
 
@@ -47,10 +47,10 @@ As a student, I want to progress through 6 chapters in order (architecture → c
 
 **Acceptance Scenarios**:
 
-1. **Given** I complete Chapter 1 (architecture), **When** I click Next, **Then** I see Chapter 2 (communication patterns)
-2. **Given** I am on Chapter 3 (packages), **When** I click Previous, **Then** I return to Chapter 2
+1. **Given** I complete Chapter 1 (Architecture), **When** I click Next, **Then** I see Chapter 2 (Communication)
+2. **Given** I am on Chapter 3 (Packages), **When** I click Previous, **Then** I return to Chapter 2
 3. **Given** I complete Chapter 6, **When** I click Module 1 link, **Then** I return to Module 1 overview
-4. **Given** I am on any chapter, **When** I use sidebar, **Then** I see all 6 chapters listed with current highlighted
+4. **Given** I am on any chapter, **When** I use sidebar, **Then** I see all 6 chapters listed as "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers" with current highlighted
 
 ---
 
@@ -60,13 +60,13 @@ As a student, I want to search for specific topics (like "publisher" or "URDF"),
 
 **Why this priority**: Improves content discoverability but students can browse chapters without search.
 
-**Independent Test**: Use Docusaurus search to find "publisher", "URDF", "launch file" - verify results link to correct chapters.
+**Independent Test**: Use Docusaurus search to find "publisher", "URDF", "launch file" - verify results link to Communication, URDF, and Launch chapters respectively.
 
 **Acceptance Scenarios**:
 
-1. **Given** I type "ROS 2 publisher" in search, **When** results appear, **Then** Chapter 2 appears in results
-2. **Given** I search "URDF joints", **When** I click result, **Then** I navigate to Chapter 5 section about joints
-3. **Given** I search "colcon build", **When** results show, **Then** Chapter 3 appears with build commands highlighted
+1. **Given** I type "ROS 2 publisher" in search, **When** results appear, **Then** Communication chapter appears in results
+2. **Given** I search "URDF joints", **When** I click result, **Then** I navigate to URDF chapter section about joints
+3. **Given** I search "colcon build", **When** results show, **Then** Packages chapter appears with build commands highlighted
 
 ### Edge Cases
 
@@ -100,7 +100,7 @@ As a student, I want to search for specific topics (like "publisher" or "URDF"),
 - **FR-019**: All code blocks MUST use syntax highlighting for appropriate languages (Python, bash, XML, YAML)
 - **FR-020**: All code blocks MUST include copy-to-clipboard button (provided by Docusaurus default features)
 - **FR-021**: Chapters MUST render correctly on mobile, tablet, and desktop viewports
-- **FR-022**: Chapter navigation MUST work bidirectionally (Module 1 overview ← → Chapters)
+- **FR-022**: Chapter navigation MUST work bidirectionally (Module 1 overview ← → Chapters) and sidebar MUST display exact chapter names: "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers"
 - **FR-023**: All chapters MUST be indexed by Docusaurus search functionality
 - **FR-024**: All Python code examples MUST follow PEP 8 style guide conventions
 
@@ -178,6 +178,8 @@ As a student, I want to search for specific topics (like "publisher" or "URDF"),
 ### Session 2025-12-06
 
 - Q: The current feature specification (spec.md) explicitly lists "Content for Modules 2, 3, 4" as "Out of Scope". Are you requesting to modify the scope to include these modules, or are you seeking more detailed chapters *within the current Module 1 scope*? → A: Modify scope to include Modules 2, 3, 4
+
+- Q: How should the chapter titles appear in the sidebar navigation - should they use the full "Chapter X: [Topic]" format or just the topic names? → A: Use exact chapter names: "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers"
 
 - Students have access to Ubuntu 22.04 system (physical machine, VM, or WSL2 on Windows)
 - Students possess basic Python programming knowledge (variables, functions, classes)

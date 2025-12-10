@@ -157,11 +157,11 @@ book-site/
 Physical AI & Humanoid Robotics Textbook
 │
 ├── Module 1: Robotic Nervous System (ROS 2) [Weeks 3-5]
-│   ├── Chapter 1: ROS 2 Fundamentals
-│   ├── Chapter 2: Nodes, Topics, Services
-│   ├── Chapter 3: Actions & Python Agents (rclpy)
-│   ├── Chapter 4: URDF for Humanoids
-│   └── Chapter 5: Launch Files & Package Structure
+│   ├── Chapter 1: ROS 2 Architecture and Installation
+│   ├── Chapter 2: ROS 2 Communication Patterns
+│   ├── Chapter 3: ROS 2 Packages and Build System
+│   ├── Chapter 4: Launch Files and Parameters
+│   └── Chapter 5: URDF - Unified Robot Description Format and Robot Controllers
 │
 ├── Module 2: Digital Twin (Gazebo & Unity) [Weeks 6-8]
 │   ├── Chapter 6: Digital Twin Concepts

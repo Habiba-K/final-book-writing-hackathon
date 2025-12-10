@@ -1,86 +1,121 @@
-# Data Model: Module 2 Digital Twin (Gazebo & Unity)
+# Data Model: Digital Twin (Gazebo & Unity)
 
-## Key Entities
+## Core Entities
 
 ### Digital Twin
-- **Description**: Virtual representation of a physical robot system that connects Robot → ROS → Simulator → Unity (theory focus)
 - **Attributes**:
-  - virtual_representation: The digital model of the physical robot
-  - physical_properties: Mass, dimensions, joint constraints
-  - sensor_models: Simulated sensor configurations
-  - behavior_characteristics: Movement patterns, response to environment
-- **Relationships**: Contains Simulation Pipeline, Robot Model, and Bridge System
+  - id (string): Unique identifier for the digital twin instance
+  - name (string): Human-readable name of the digital twin
+  - robot_model (string): Reference to the URDF model used
+  - simulation_state (object): Current state of the simulation (position, orientation, joint states)
+  - sensors_config (array): List of sensor configurations attached to the twin
+  - creation_date (datetime): When the digital twin was created
+  - last_updated (datetime): Last modification timestamp
 
-### Simulation Pipeline
-- **Description**: The data flow system connecting ROS, Gazebo, and Unity components (theory focus)
+### Robot Model (URDF)
 - **Attributes**:
-  - data_flow_direction: Direction of information between components
-  - synchronization_mechanisms: How components maintain consistent state
-  - communication_protocols: Methods of data transmission
-- **Relationships**: Connected to Digital Twin, processes Robot Model data
+  - model_id (string): Unique identifier for the robot model
+  - name (string): Robot name (e.g., "humanoid_robot")
+  - urdf_path (string): File path to the URDF definition
+  - mesh_paths (array): Paths to 3D mesh files
+  - joint_definitions (array): Joint properties (type, limits, dynamics)
+  - link_definitions (array): Link properties (mass, inertia, visuals)
+  - material_definitions (array): Visual material properties
 
-### Robot Model
-- **Description**: Digital representation of a physical robot in URDF/SDF format (theory focus)
+### Sensor Configuration
 - **Attributes**:
-  - urdf_sdf_definition: Robot description in standard formats
-  - physical_properties: Physical characteristics of the robot
-  - sensor_configurations: Sensor placements and types
-  - joint_definitions: Joint types and constraints
-- **Relationships**: Used by Simulation Pipeline, represented in Digital Twin
+  - sensor_id (string): Unique identifier for the sensor
+  - sensor_type (enum): Type of sensor (LIDAR, CAMERA, IMU, FORCE_TORQUE)
+  - name (string): Sensor name for identification
+  - parent_link (string): Link to which the sensor is attached
+  - position (object): Position relative to parent link (x, y, z)
+  - orientation (object): Orientation relative to parent link (roll, pitch, yaw)
+  - parameters (object): Sensor-specific parameters (range, resolution, etc.)
+  - ros_topic (string): ROS 2 topic name for sensor data output
 
-### Bridge System
-- **Description**: The communication layer enabling message flow between components (theory focus)
+### Simulation Environment
 - **Attributes**:
-  - message_formats: Standardized data formats for communication
-  - protocol_adapters: Adapters for different system interfaces
-  - synchronization_layer: Maintains consistency across systems
-- **Relationships**: Connects all components in the Digital Twin architecture
+  - env_id (string): Unique identifier for the environment
+  - name (string): Environment name
+  - world_file (string): Path to Gazebo world file
+  - gravity (object): Gravity vector (x, y, z)
+  - physics_engine (string): Physics engine configuration
+  - lighting_config (object): Environment lighting settings
+  - objects (array): Static objects in the environment
+
+### Joint State
+- **Attributes**:
+  - joint_name (string): Name of the joint
+  - position (float): Current joint position (radians for revolute, meters for prismatic)
+  - velocity (float): Current joint velocity
+  - effort (float): Current joint effort/torque
+  - timestamp (datetime): When the state was recorded
+
+### Control Command
+- **Attributes**:
+  - command_id (string): Unique identifier for the command
+  - joint_names (array): Names of joints to control
+  - positions (array): Target positions for position control
+  - velocities (array): Target velocities for velocity control
+  - efforts (array): Target efforts for effort control
+  - duration (float): Time to reach target (for trajectory commands)
+
+## Relationships
+
+### Digital Twin → Robot Model
+- One-to-One: Each digital twin uses exactly one robot model
+
+### Digital Twin → Sensor Configuration
+- One-to-Many: Each digital twin can have multiple sensor configurations
+
+### Digital Twin → Simulation Environment
+- One-to-One: Each digital twin exists in one simulation environment
+
+### Simulation Environment → Objects
+- One-to-Many: Each environment contains multiple static objects
+
+### Digital Twin → Joint State
+- One-to-Many: Each digital twin has multiple joint states over time
+
+### Control Command → Digital Twin
+- Many-to-One: Multiple control commands can target the same digital twin
+
+## Validation Rules
+
+1. **Digital Twin Validation**:
+   - name must be 3-50 characters
+   - robot_model must reference an existing Robot Model
+   - sensors_config must be valid sensor configurations
+
+2. **Robot Model Validation**:
+   - urdf_path must exist and be a valid URDF file
+   - joint_definitions must have valid types and limits
+   - mesh_paths must reference existing files
+
+3. **Sensor Configuration Validation**:
+   - sensor_type must be one of the defined enum values
+   - parent_link must reference a valid link in the robot model
+   - ros_topic must follow ROS 2 naming conventions
+
+4. **Joint State Validation**:
+   - joint_name must exist in the robot model
+   - position must be within joint limits
+   - timestamp must be current or recent
 
 ## State Transitions
 
 ### Digital Twin States
-- **Inactive**: Digital twin exists but simulation is not running
-- **Initializing**: Simulation environment is being set up
-- **Running**: Simulation is active and responding to inputs
-- **Paused**: Simulation is temporarily stopped
-- **Terminated**: Simulation has ended
+- **CREATED**: Digital twin defined but not yet simulated
+- **RUNNING**: Simulation is active and publishing data
+- **PAUSED**: Simulation is paused but can be resumed
+- **STOPPED**: Simulation has been stopped
+- **ERROR**: Simulation encountered an error
 
-### Simulation Pipeline States
-- **Disconnected**: Components are not communicating
-- **Connecting**: Establishing communication channels
-- **Synchronized**: All components maintain consistent state
-- **Desynchronized**: Components have inconsistent states
-- **Recovering**: Attempting to restore synchronization
-
-## Validation Rules
-
-### Digital Twin Validation
-- Must have proper architecture definition (Robot → ROS → Simulator → Unity)
-- Must maintain consistency across all connected components
-- Must handle state synchronization properly
-
-### Simulation Pipeline Validation
-- Data flow must follow defined architecture patterns
-- Communication protocols must be standardized
-- Synchronization mechanisms must be reliable
-
-### Robot Model Validation
-- URDF/SDF definitions must be valid
-- Physical properties must be realistic
-- Sensor configurations must be feasible
-
-### Bridge System Validation
-- Message formats must be standardized
-- Communication must be bidirectional where required
-- Synchronization must be maintained across all components
-
-## Relationships
-
-```
-Digital Twin 1 -- 1 Simulation Pipeline
-Simulation Pipeline 1 -- * Robot Model
-Robot Model 1 -- 1 Bridge System
-Bridge System 1 -- 1 Digital Twin (bidirectional communication)
-```
-
-The Digital Twin contains the core concept that connects all other entities. The Simulation Pipeline manages the flow of data between components. The Robot Model provides the specific representation used in the simulation. The Bridge System enables communication between all components, ensuring the entire architecture functions as intended.
+### State Transition Rules
+- CREATED → RUNNING: When simulation starts
+- RUNNING → PAUSED: When user pauses simulation
+- PAUSED → RUNNING: When user resumes simulation
+- RUNNING → STOPPED: When user stops simulation
+- PAUSED → STOPPED: When user stops simulation
+- Any state → ERROR: When simulation encounters an unrecoverable error
+- ERROR → CREATED: When error is resolved and simulation is reset

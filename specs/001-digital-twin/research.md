@@ -1,97 +1,57 @@
-# Research: Module 2 Digital Twin (Gazebo & Unity)
+# Research: Digital Twin (Gazebo & Unity) Implementation
+
+## Architecture Decisions
+
+### Simulation Environment Choice: Gazebo vs Unity Physics
+
+**Decision**: Use Gazebo for physics simulation and Unity for visualization only
+**Rationale**: Gazebo provides mature, accurate physics simulation specifically designed for robotics with ROS 2 integration. Unity excels at rendering and visualization but is not optimized for high-fidelity physics simulation required for robotics.
+**Alternatives Considered**:
+- Unity physics engine for both simulation and visualization - rejected due to lack of robotics-specific features and ROS 2 integration
+- Custom physics engine - rejected due to complexity and maintenance burden
+
+### Level of Sensor Fidelity and Sampling Rates
+
+**Decision**: Simulate sensors at realistic rates matching real hardware (LiDAR: 10-20Hz, IMU: 100-200Hz, Depth Camera: 30Hz)
+**Rationale**: These rates match typical real-world sensors and provide realistic learning experience without excessive computational overhead
+**Alternatives Considered**:
+- Higher rates for better accuracy - rejected due to increased computational requirements
+- Lower rates for better performance - rejected as it wouldn't match real-world expectations
+
+### GPU and Workstation Requirements
+
+**Decision**: NVIDIA RTX 30+ series recommended for optimal performance with Unity visualization
+**Rationale**: Unity rendering and Gazebo physics can be computationally intensive; modern GPUs with good OpenGL support provide better experience
+**Alternatives Considered**:
+- Lower-end GPUs - possible but may result in poor performance
+- CPU-only - possible for basic simulation but Unity visualization would be slow
+
+### ROS 2 Controller Selection
+
+**Decision**: Use ros2_control framework with joint state broadcaster and position/velocity controllers
+**Rationale**: ros2_control is the standard, well-maintained framework for ROS 2 robot control with good Gazebo integration
+**Alternatives Considered**:
+- Custom controllers - rejected due to maintenance burden
+- Other frameworks - rejected as ros2_control is the standard approach
+
+## Technology Stack Research
+
+### Gazebo Version Selection
+
+**Decision**: Use Gazebo Garden (or Gazebo Classic if needed for compatibility)
+**Rationale**: Gazebo Garden is the latest stable version with ROS 2 Humble integration
+**Alternatives Considered**:
+- Gazebo Classic - still supported but being phased out
+- Ignition Gazebo - intermediate version, now replaced by Gazebo Garden
+
+### Unity Integration Approach
+
+**Decision**: Use Unity Robotics Simulation package for ROS 2 communication
+**Rationale**: Official Unity package designed specifically for ROS 2 integration with standardized message formats
+**Alternatives Considered**:
+- Custom ROS 2 communication - complex and error-prone
+- Other middleware - would add unnecessary complexity
 
 ## Research Summary
 
-This research document addresses the technical requirements and implementation approach for Module 2: Digital Twin (Gazebo & Unity), which teaches students about digital twin concepts, Gazebo simulation basics, Unity integration, ROS-Gazebo-Unity bridge, and digital twin validation with focus on theoretical understanding.
-
-## Key Technologies & Components
-
-### Digital Twin Concepts
-- **Purpose**: Virtual representation of physical robot systems connecting Robot → ROS → Simulator → Unity
-- **Role in Robotics**: Enables safe testing, validation, and development of robot algorithms without hardware risk
-- **Architecture**: Multi-component system integrating physical robots, ROS communication, simulation environments, and visualization
-
-
-
-## Technical Approach
-
-### Content Structure
-The module will be organized into 5 chapters following the specification:
-
-1. **Digital Twin Overview**: Foundational knowledge about digital twins in robotics (theory focus)
-2. **Gazebo Simulation Basics**: Gazebo fundamentals with models, sensors, and commands (theory focus)
-3. **Unity Robotics Integration**: Unity packages and data visualization (theory focus)
-4. **ROS–Gazebo–Unity Bridge**: Message flow and communication (theory focus)
-5. **Digital Twin Validation**: Synchronization and performance validation (theory focus)
-
-### Documentation Format
-- **Format**: Markdown tutorials optimized for Docusaurus
-- **Length**: Under 2 pages per chapter, concise and precise
-- **Content**: Theory-focused with minimal text as specified
-- **Commands**: Text-only commands for student copy-paste
-
-### Integration Patterns
-- **Robot → ROS**: Physical robot state published to ROS topics
-- **ROS → Simulator**: ROS data drives Gazebo simulation
-- **Simulator → Unity**: Simulation data transmitted to Unity for visualization
-- **Synchronization**: All components maintain consistent state
-
-## Best Practices & Guidelines
-
-### For Digital Twin Theory
-- Focus on conceptual understanding over implementation details
-- Explain architecture patterns and data flow
-- Provide clear examples of use cases
-- Emphasize validation and synchronization concepts
-
-### For Gazebo Simulation
-- Cover supported models and sensor types
-- Explain URDF/SDF import processes
-- Document connection patterns to ROS 2 topics
-- Focus on theoretical understanding
-
-### For Unity Integration
-- Overview of Unity robotics packages
-- Explain how Unity receives robot transforms
-- Document visualization approaches
-- Theory-focused approach as specified
-
-### For Educational Content
-- Start with simple concepts, progress to complex architectures
-- Include troubleshooting sections for common issues
-- Provide clear success criteria for each chapter
-- Use consistent terminology throughout
-
-## Research Outcomes
-
-### Decision: Technology Stack
-- **Primary**: ROS 2 Humble/Iron with Gazebo for simulation
-- **Secondary**: Unity for visualization (GPU-dependent)
-- **Rationale**: Industry-standard tools with good educational resources
-
-### Decision: Content Format
-- **Format**: Markdown with embedded code examples and theory
-- **Rationale**: Lightweight, version-controllable, suitable for GitHub deployment
-- **Alternatives considered**: Jupyter notebooks, interactive environments
-
-### Decision: Chapter Structure
-- **Structure**: Progressive learning from concepts to integration
-- **Rationale**: Builds understanding systematically with theory focus
-- **Alternatives considered**: Feature-based organization vs. concept-based
-
-## Implementation Considerations
-
-### Performance Requirements
-- Content must be lightweight for GitHub/Vercel deployment
-- Chapters should be under 2 pages each as specified
-- Theory-focused approach to minimize complexity
-
-### Compatibility Requirements
-- ROS 2 Humble and Iron compatibility
-- Python 3.8+ for ROS 2 examples
-
-### Documentation Standards
-- Follow the 7 core principles from the textbook constitution
-- Use consistent formatting and terminology
-- Include all 6 required chapter elements (specification, objectives, examples, steps, code, exercises)
-- Focus on theory as specified in requirements
+All key architectural decisions have been researched and documented. The approach of using Gazebo for physics simulation with ROS 2 integration and Unity for visualization provides the best balance of functionality, learning value, and maintainability. The recommended hardware requirements align with the project's goal of high-fidelity simulation while remaining accessible to students.

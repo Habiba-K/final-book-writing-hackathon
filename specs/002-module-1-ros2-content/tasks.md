@@ -32,7 +32,7 @@ description: "Task list for Module 1-4 ROS 2 Content with Installation and Code 
 - [ ] T002 Create `book-site/docs/module-2/` directory
 - [ ] T003 Create `book-site/docs/module-3/` directory
 - [ ] T004 Create `book-site/docs/module-4/` directory
-- [ ] T005 Update `book-site/sidebars.ts` to include Module 1 in sidebar
+- [ ] T005 Update `book-site/sidebars.ts` to include Module 1 in sidebar with chapters: "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers" (FR-022)
 - [ ] T006 Update `book-site/sidebars.ts` to include Module 2 in sidebar
 - [ ] T007 Update `book-site/sidebars.ts` to include Module 3 in sidebar
 - [ ] T008 Update `book-site/sidebars.ts` to include Module 4 in sidebar
@@ -61,28 +61,28 @@ description: "Task list for Module 1-4 ROS 2 Content with Installation and Code 
 
 ### Implementation for User Story 1 (Module 1 Chapters)
 
-- [ ] T012 [P] [US1] Create Chapter 1: ROS 2 Architecture in `book-site/docs/module-1/chapter-1-architecture.md`
-- [ ] T013 [P] [US1] Create Chapter 2: ROS 2 Communication in `book-site/docs/module-1/chapter-2-communication.md`
-- [ ] T014 [P] [US1] Create Chapter 3: ROS 2 Packages in `book-site/docs/module-1/chapter-3-packages.md`
-- [ ] T015 [P] [US1] Create Chapter 4: ROS 2 Launch in `book-site/docs/module-1/chapter-4-launch.md`
-- [ ] T016 [P] [US1] Create Chapter 5: ROS 2 URDF in `book-site/docs/module-1/chapter-5-urdf.md`
-- [ ] T017 [P] [US1] Create Chapter 6: ROS 2 Controllers in `book-site/docs/module-1/chapter-6-controllers.md`
-- [ ] T018 [US1] Add Ubuntu 22.04 ROS 2 Humble installation commands to `book-site/docs/module-1/chapter-1-architecture.md` (FR-003)
-- [ ] T019 [US1] Add sample Python publisher/subscriber code with highlighting to `book-site/docs/module-1/chapter-1-architecture.md` (FR-004)
-- [ ] T020 [US1] Add 4 runnable code examples (publisher, subscriber, service server, service client) to `book-site/docs/module-1/chapter-2-communication.md` (FR-005)
-- [ ] T021 [US1] Add terminal commands for executing code examples to `book-site/docs/module-1/chapter-2-communication.md` (FR-006)
-- [ ] T022 [US1] Describe ROS 2 package directory structure in `book-site/docs/module-1/chapter-3-packages.md` (FR-007)
-- [ ] T023 [US1] Add annotated `setup.py` template to `book-site/docs/module-1/chapter-3-packages.md` (FR-008)
-- [ ] T024 [US1] Add colcon build, install, source commands to `book-site/docs/module-1/chapter-3-packages.md` (FR-009)
-- [ ] T025 [US1] Add complete Python launch file example that starts 2+ nodes to `book-site/docs/module-1/chapter-4-launch.md` (FR-010)
-- [ ] T026 [US1] Add YAML parameter file example with node namespaces and parameter definitions to `book-site/docs/module-1/chapter-4-launch.md` (FR-011)
-- [ ] T027 [US1] Demonstrate parameter declaration and retrieval in Python nodes in `book-site/docs/module-1/chapter-4-launch.md` (FR-012)
-- [ ] T028 [US1] Explain URDF XML syntax for links in `book-site/docs/module-1/chapter-5-urdf.md` (FR-013)
-- [ ] T029 [US1] Explain URDF joint types (revolute, prismatic, fixed) with axis definitions in `book-site/docs/module-1/chapter-5-urdf.md` (FR-014)
-- [ ] T030 [US1] Include complete sample humanoid arm URDF with 3-4 joints (shoulder, elbow, wrist) in `book-site/docs/module-1/chapter-5-urdf.md` (FR-015)
-- [ ] T031 [US1] Add complete controller node code that subscribes to sensor topics to `book-site/docs/module-1/chapter-6-controllers.md` (FR-016)
-- [ ] T032 [US1] Demonstrate publishing velocity or torque commands to actuator topics in `book-site/docs/module-1/chapter-6-controllers.md` (FR-017)
-- [ ] T033 [US1] Explain control loop timing using ROS 2 Timer API in `book-site/docs/module-1/chapter-6-controllers.md` (FR-018)
+- [ ] T012 [P] [US1] Create Architecture chapter in `book-site/docs/module-1/architecture.md`
+- [ ] T013 [P] [US1] Create Communication chapter in `book-site/docs/module-1/communication.md`
+- [ ] T014 [P] [US1] Create Packages chapter in `book-site/docs/module-1/packages.md`
+- [ ] T015 [P] [US1] Create Launch chapter in `book-site/docs/module-1/launch.md`
+- [ ] T016 [P] [US1] Create URDF chapter in `book-site/docs/module-1/urdf.md`
+- [ ] T017 [P] [US1] Create Controllers chapter in `book-site/docs/module-1/controllers.md`
+- [ ] T018 [US1] Add Ubuntu 22.04 ROS 2 Humble installation commands to `book-site/docs/module-1/architecture.md` (FR-003)
+- [ ] T019 [US1] Add sample Python publisher/subscriber code with highlighting to `book-site/docs/module-1/architecture.md` (FR-004)
+- [ ] T020 [US1] Add 4 runnable code examples (publisher, subscriber, service server, service client) to `book-site/docs/module-1/communication.md` (FR-005)
+- [ ] T021 [US1] Add terminal commands for executing code examples to `book-site/docs/module-1/communication.md` (FR-006)
+- [ ] T022 [US1] Describe ROS 2 package directory structure in `book-site/docs/module-1/packages.md` (FR-007)
+- [ ] T023 [US1] Add annotated `setup.py` template to `book-site/docs/module-1/packages.md` (FR-008)
+- [ ] T024 [US1] Add colcon build, install, source commands to `book-site/docs/module-1/packages.md` (FR-009)
+- [ ] T025 [US1] Add complete Python launch file example that starts 2+ nodes to `book-site/docs/module-1/launch.md` (FR-010)
+- [ ] T026 [US1] Add YAML parameter file example with node namespaces and parameter definitions to `book-site/docs/module-1/launch.md` (FR-011)
+- [ ] T027 [US1] Demonstrate parameter declaration and retrieval in Python nodes in `book-site/docs/module-1/launch.md` (FR-012)
+- [ ] T028 [US1] Explain URDF XML syntax for links in `book-site/docs/module-1/urdf.md` (FR-013)
+- [ ] T029 [US1] Explain URDF joint types (revolute, prismatic, fixed) with axis definitions in `book-site/docs/module-1/urdf.md` (FR-014)
+- [ ] T030 [US1] Include complete sample humanoid arm URDF with 3-4 joints (shoulder, elbow, wrist) in `book-site/docs/module-1/urdf.md` (FR-015)
+- [ ] T031 [US1] Add complete controller node code that subscribes to sensor topics to `book-site/docs/module-1/controllers.md` (FR-016)
+- [ ] T032 [US1] Demonstrate publishing velocity or torque commands to actuator topics in `book-site/docs/module-1/controllers.md` (FR-017)
+- [ ] T033 [US1] Explain control loop timing using ROS 2 Timer API in `book-site/docs/module-1/controllers.md` (FR-018)
 - [ ] T034 [US1] Ensure all Python code examples follow PEP 8 style guide conventions (FR-024)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
@@ -99,7 +99,8 @@ description: "Task list for Module 1-4 ROS 2 Content with Installation and Code 
 
 - [ ] T035 [US2] Verify Previous/Next navigation links for all chapters in `book-site/docs/module-1/` (FR-002)
 - [ ] T036 [US2] Verify bidirectional navigation (Module 1 overview ← → Chapters) (FR-022)
-- [ ] T037 [US2] Update `book-site/sidebars.ts` to ensure all 6 chapters for Module 1 are listed with current highlighted
+- [ ] T037 [US2] Update `book-site/sidebars.ts` to ensure all 6 chapters for Module 1 are listed as "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers" with current highlighted (FR-022)
+- [ ] T038 [US2] Verify sidebar displays exact chapter names: "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers" in browser (FR-022)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -113,8 +114,8 @@ description: "Task list for Module 1-4 ROS 2 Content with Installation and Code 
 
 ### Implementation for User Story 3
 
-- [ ] T038 [US3] Verify all chapters in `book-site/docs/module-1/` are indexed by Docusaurus search functionality (FR-023)
-- [ ] T039 [US3] Test Docusaurus search with keywords like "ROS 2 publisher", "URDF joints", or "colcon build"
+- [ ] T039 [US3] Verify all chapters in `book-site/docs/module-1/` are indexed by Docusaurus search functionality (FR-023)
+- [ ] T040 [US3] Test Docusaurus search with keywords like "ROS 2 publisher", "URDF joints", or "colcon build"
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -124,13 +125,14 @@ description: "Task list for Module 1-4 ROS 2 Content with Installation and Code 
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T040 Verify all code blocks use syntax highlighting for appropriate languages (Python, bash, XML, YAML) (FR-019)
-- [ ] T041 Verify all code blocks include copy-to-clipboard button (provided by Docusaurus default features) (FR-020)
-- [ ] T042 Verify chapters render correctly on mobile, tablet, and desktop viewports (FR-021, NFR-001, NFR-003, NFR-008)
-- [ ] T043 Run `npm run build` in `book-site/` to ensure total site build time remains under 10 seconds (NFR-002)
-- [ ] T044 Verify search indexing includes all chapter content body text and code block comments (NFR-005)
-- [ ] T045 Verify page content is accessible to screen readers using semantic HTML (NFR-006)
-- [ ] T046 Verify chapter navigation supports keyboard-only operation (Tab key navigation, Enter to activate) (NFR-007)
+- [ ] T041 Verify all code blocks use syntax highlighting for appropriate languages (Python, bash, XML, YAML) (FR-019)
+- [ ] T042 Verify all code blocks include copy-to-clipboard button (provided by Docusaurus default features) (FR-020)
+- [ ] T043 Verify chapters render correctly on mobile, tablet, and desktop viewports (FR-021, NFR-001, NFR-003, NFR-008)
+- [ ] T044 Run `npm run build` in `book-site/` to ensure total site build time remains under 10 seconds (NFR-002)
+- [ ] T045 Verify search indexing includes all chapter content body text and code block comments (NFR-005)
+- [ ] T046 Verify page content is accessible to screen readers using semantic HTML (NFR-006)
+- [ ] T047 Verify chapter navigation supports keyboard-only operation (Tab key navigation, Enter to activate) (NFR-007)
+- [ ] T048 Verify sidebar displays exact chapter names: "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers" as specified in FR-022
 
 ---
 
@@ -174,12 +176,12 @@ description: "Task list for Module 1-4 ROS 2 Content with Installation and Code 
 
 ```bash
 # Launch all chapter creation tasks for User Story 1 together:
-Task: "Create Chapter 1: ROS 2 Architecture in book-site/docs/module-1/chapter-1-architecture.md"
-Task: "Create Chapter 2: ROS 2 Communication in book-site/docs/module-1/chapter-2-communication.md"
-Task: "Create Chapter 3: ROS 2 Packages in book-site/docs/module-1/chapter-3-packages.md"
-Task: "Create Chapter 4: ROS 2 Launch in book-site/docs/module-1/chapter-4-launch.md"
-Task: "Create Chapter 5: ROS 2 URDF in book-site/docs/module-1/chapter-5-urdf.md"
-Task: "Create Chapter 6: ROS 2 Controllers in book-site/docs/module-1/chapter-6-controllers.md"
+Task: "Create Architecture chapter in book-site/docs/module-1/architecture.md"
+Task: "Create Communication chapter in book-site/docs/module-1/communication.md"
+Task: "Create Packages chapter in book-site/docs/module-1/packages.md"
+Task: "Create Launch chapter in book-site/docs/module-1/launch.md"
+Task: "Create URDF chapter in book-site/docs/module-1/urdf.md"
+Task: "Create Controllers chapter in book-site/docs/module-1/controllers.md"
 ```
 
 ---

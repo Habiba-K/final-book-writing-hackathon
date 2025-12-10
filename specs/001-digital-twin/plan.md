@@ -1,13 +1,12 @@
-# Implementation Plan: Module 2 — Digital Twin (Gazebo & Unity)
+# Implementation Plan: Digital Twin (Gazebo & Unity)
 
-**Branch**: `001-digital-twin` | **Date**: 2025-12-07 | **Spec**: [specs/001-digital-twin/spec.md](specs/001-digital-twin/spec.md)
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `001-digital-twin` | **Date**: 2025-12-09 | **Spec**: [link to specs/001-digital-twin/spec.md]
 
 **Note**: This template is filled in by the `/sp.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
 
 ## Summary
 
-Create educational content for Module 2: Digital Twin (Gazebo & Unity) that teaches students about digital twin concepts, Gazebo simulation basics, Unity integration, ROS-Gazebo-Unity bridge, and digital twin validation. The content will focus on theoretical understanding with text-only commands, following the same writing pattern as Module 1 with short, precise chapters suitable for GitHub/Vercel deployment.
+Implementation of a Digital Twin module for humanoid robot simulation using Gazebo for physics simulation and Unity for visualization. The system will enable students to simulate realistic robot behavior, sensor data, and control systems using ROS 2 integration. The module covers digital twin concepts, Gazebo fundamentals, physics simulation, sensor modeling, and optional Unity visualization.
 
 ## Technical Context
 
@@ -17,31 +16,28 @@ Create educational content for Module 2: Digital Twin (Gazebo & Unity) that teac
   the iteration process.
 -->
 
-**Language/Version**: Markdown, Python 3.8+ for ROS 2 examples
-**Primary Dependencies**: ROS 2 Humble/Iron, Gazebo simulation, Unity 3D, Docusaurus
-**Storage**: N/A (documentation only)
-**Testing**: N/A (documentation only)
-**Target Platform**: GitHub Pages/Vercel deployment, Ubuntu/Linux for Gazebo simulation
-**Project Type**: Documentation - educational content for robotics simulation
-**Performance Goals**: Lightweight content suitable for web deployment, chapters under 2 pages each
-**Constraints**: No binaries in repository, text-only commands only, theory-focused content
-**Scale/Scope**: 5 chapters covering digital twin concepts, Gazebo, Unity, bridge, and validation
+**Language/Version**: Python 3.10+ for ROS 2 nodes, C# for Unity scripts, XML for URDF models
+**Primary Dependencies**: ROS 2 Humble/Iron, Gazebo Classic/Classic Garden, Unity 2022.3 LTS, rclpy
+**Storage**: N/A (simulation environment, no persistent storage required)
+**Testing**: pytest for ROS 2 nodes, Unity Test Framework for visualization
+**Target Platform**: Ubuntu 22.04 LTS (primary), Windows 10+ (Unity only)
+**Project Type**: Multi-project (ROS 2 packages, Gazebo worlds, Unity scenes)
+**Performance Goals**: 30+ FPS for real-time simulation with humanoid robot and multiple sensors
+**Constraints**: GPU recommended (NVIDIA RTX 30+ series), 16GB+ RAM, Ubuntu 22.04 with ROS 2 Humble/Iron
+**Scale/Scope**: Single robot simulation with multiple sensors, up to 100Hz sensor update rates
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-Based on the Physical AI & Humanoid Robotics Textbook Constitution:
+Based on the constitution, this implementation must:
+- Prioritize clarity over complexity (Simplicity principle)
+- Use official documentation sources for ROS 2, Gazebo, and Unity (Accuracy principle)
+- Include only necessary features for learning objectives (Minimalism principle)
+- Be free-tier friendly with local development possible (Free-Tier Friendly principle)
+- Use consistent formatting and terminology (Consistency principle)
 
-- **Simplicity**: Content will prioritize clarity over complexity with incremental steps and clear explanations (PASSED)
-- **Accuracy**: All technical content will be based on official documentation sources (ROS 2, Gazebo, Unity) (PASSED)
-- **Minimalism**: Content will include only what is necessary to achieve learning objectives (PASSED)
-- **Free-Tier Friendly**: All tools will have free options; no expensive GPU requirements (PASSED)
-- **Student-Focused Clarity**: Writing will use clear English with technical terms defined on first use (PASSED)
-- **Documentation-Based Development**: All content will reference official documentation (PASSED)
-- **Consistency**: Formatting and terminology will be consistent throughout (PASSED)
-
-All constitution gates pass - this is educational documentation content that aligns with the textbook's core principles.
+All requirements align with the constitution. No violations identified.
 
 ## Project Structure
 
@@ -54,25 +50,40 @@ specs/001-digital-twin/
 ├── data-model.md        # Phase 1 output (/sp.plan command)
 ├── quickstart.md        # Phase 1 output (/sp.plan command)
 ├── contracts/           # Phase 1 output (/sp.plan command)
+│   └── ros2_interfaces.md  # ROS 2 interface specifications
 └── tasks.md             # Phase 2 output (/sp.tasks command - NOT created by /sp.plan)
 ```
 
 ### Source Code (repository root)
 
 ```text
+# Digital Twin Module Structure
 book-site/
 ├── docs/
-│   ├── module-2-digital-twin/        # Module 2 content directory
-│   │   ├── 01-digital-twin-overview/
-│   │   ├── 02-gazebo-simulation-basics/
-│   │   ├── 03-unity-robotics-integration/
-│   │   ├── 04-ros-gazebo-unity-bridge/
-│   │   └── 05-digital-twin-validation/
-│   └── ...
-└── docusaurus.config.js              # Docusaurus configuration
+│   └── module-2-digital-twin/      # Module documentation
+│       ├── 01-digital-twin-overview/
+│       ├── 02-gazebo-simulation-basics/
+│       ├── 03-unity-robotics-integration/
+│       ├── 04-ros-gazebo-unity-bridge/
+│       └── 05-digital-twin-validation/
+├── static/
+│   └── examples/                   # Example code and assets
+└── src/
+    └── pages/                      # Custom Docusaurus pages if needed
 ```
 
-**Structure Decision**: This is a documentation-only feature following the textbook's educational content approach. No executable code is added to the repository; only educational tutorials in Markdown format focused on theory as specified.
+```text
+# ROS 2 Packages for Digital Twin
+ros2-workspace/
+├── src/
+│   ├── digital_twin_description/   # Robot URDF models and meshes
+│   ├── digital_twin_gazebo/        # Gazebo launch files and worlds
+│   ├── digital_twin_sensors/       # Sensor configuration and plugins
+│   ├── digital_twin_control/       # ROS 2 controllers and joint states
+│   └── digital_twin_examples/      # Example nodes for teleoperation
+```
+
+**Structure Decision**: Multi-project approach with documentation in Docusaurus format for the textbook and ROS 2 packages in a separate workspace. This follows the standard ROS 2 development workflow while maintaining the textbook's documentation structure.
 
 ## Complexity Tracking
 
@@ -80,4 +91,4 @@ book-site/
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| N/A | N/A | N/A |
+| [e.g., Multiple project types] | ROS 2 + Gazebo + Unity integration required for complete digital twin | Single simulation environment insufficient for comprehensive learning |

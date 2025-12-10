@@ -1,0 +1,141 @@
+# Voice Processing API Contract
+
+openapi: 3.0.0
+info:
+  title: VLA Voice Processing API
+  description: API for processing voice commands in the Vision-Language-Action system
+  version: 1.0.0
+
+paths:
+  /transcribe:
+    post:
+      summary: Transcribe audio to text using Whisper
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                audio:
+                  type: string
+                  format: binary
+                  description: Audio file to transcribe
+                language:
+                  type: string
+                  default: "en"
+                  description: Language of the audio
+                model_size:
+                  type: string
+                  default: "tiny"
+                  enum: [tiny, base, small, medium, large]
+                  description: Whisper model size to use
+      responses:
+        '200':
+          description: Successful transcription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranscriptionResult'
+        '400':
+          description: Invalid audio file or parameters
+        '500':
+          description: Transcription failed
+
+  /intent:
+    post:
+      summary: Extract intent from transcribed text
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+                  description: Transcribed text to analyze
+                context:
+                  type: string
+                  description: Context for intent analysis
+      responses:
+        '200':
+          description: Intent extracted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntentResult'
+        '400':
+          description: Invalid input text
+        '500':
+          description: Intent extraction failed
+
+components:
+  schemas:
+    TranscriptionResult:
+      type: object
+      required:
+        - text
+        - confidence
+        - language
+      properties:
+        text:
+          type: string
+          description: Transcribed text
+        confidence:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Confidence score of the transcription
+        language:
+          type: string
+          description: Detected language
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranscriptionSegment'
+
+    TranscriptionSegment:
+      type: object
+      properties:
+        start:
+          type: number
+          format: float
+          description: Start time of segment in seconds
+        end:
+          type: number
+          format: float
+          description: End time of segment in seconds
+        text:
+          type: string
+          description: Text of the segment
+
+    IntentResult:
+      type: object
+      required:
+        - action_type
+        - confidence
+        - parameters
+      properties:
+        action_type:
+          type: string
+          enum: [PICK_UP, MOVE_TO, IDENTIFY, GREET, FOLLOW, STOP]
+          description: Type of action to perform
+        confidence:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Confidence score of intent classification
+        parameters:
+          type: object
+          description: Action-specific parameters
+          additionalProperties: true
+        entities:
+          type: array
+          items:
+            type: string
+          description: Named entities extracted from the text

@@ -13,8 +13,8 @@
       "chapters": [
         {
           "chapterNumber": 1,
-          "title": "ROS 2 Fundamentals",
-          "slug": "ros2-fundamentals",
+          "title": "ROS 2 Architecture and Installation",
+          "slug": "ros2-architecture-installation",
           "topics": [
             "Introduction to Robot Operating System",
             "ROS 2 vs ROS 1 Architecture",
@@ -24,46 +24,49 @@
         },
         {
           "chapterNumber": 2,
-          "title": "Nodes, Topics, and Services",
-          "slug": "nodes-topics-services",
+          "title": "ROS 2 Communication Patterns",
+          "slug": "ros2-communication-patterns",
           "topics": [
-            "Node Lifecycle Management",
-            "Publisher-Subscriber Pattern",
-            "Service Request-Response",
+            "Nodes and Node Lifecycle Management",
+            "Topics: Publisher-Subscriber Pattern",
+            "Services: Request-Response Communication",
+            "Actions: Goal-Based Communication",
             "Quality of Service (QoS) Policies"
           ]
         },
         {
           "chapterNumber": 3,
-          "title": "Actions and Python Agents",
-          "slug": "actions-python-agents",
+          "title": "ROS 2 Packages and Build System",
+          "slug": "ros2-packages-build-system",
           "topics": [
-            "Action Server Architecture",
-            "rclpy Client Library",
-            "Async Programming for Robotics",
-            "Building Control Agents"
+            "Package Structure Best Practices",
+            "Colcon Build System",
+            "CMake and setup.py Configuration",
+            "Dependencies and Workspaces"
           ]
         },
         {
           "chapterNumber": 4,
-          "title": "URDF for Humanoids",
-          "slug": "urdf-humanoids",
+          "title": "Launch Files and Parameters",
+          "slug": "launch-files-parameters",
           "topics": [
-            "Robot Description Format",
-            "Links, Joints, and Kinematics",
-            "Humanoid Skeleton Modeling",
-            "Visualization in RViz"
+            "Python Launch System",
+            "Launch File Architecture",
+            "Parameter Management",
+            "Composition and Executors"
           ]
         },
         {
           "chapterNumber": 5,
-          "title": "Launch Files and Packages",
-          "slug": "launch-packages",
+          "title": "URDF - Unified Robot Description Format and Robot Controllers",
+          "slug": "urdf-robot-controllers",
           "topics": [
-            "Python Launch System",
-            "Package Structure Best Practices",
-            "Parameter Management",
-            "Composition and Executors"
+            "Robot Description Format",
+            "Links, Joints, and Kinematics",
+            "Humanoid Skeleton Modeling",
+            "Visualization in RViz",
+            "ros2_control Framework",
+            "Joint State and Trajectory Controllers"
           ]
         }
       ],

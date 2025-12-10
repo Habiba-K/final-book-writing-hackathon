@@ -78,8 +78,7 @@ All writing MUST use clear, simple English. Technical terms MUST be defined on f
 2. Core Concepts (foundational knowledge)
 3. Step-by-Step Instructions (numbered, testable)
 4. Code Examples (annotated, runnable)
-5. Practical Examples (real-world applications)
-6. Checklist (self-verification)
+5. Checklist (self-verification)
 
 **Rationale**: Consistent structure reduces cognitive load, helps students know what to expect, and enables them to find information quickly when reviewing material.
 

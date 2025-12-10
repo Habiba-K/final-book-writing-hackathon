@@ -4,7 +4,12 @@
 
 ## Research Areas
 
-### 1. Docusaurus Multi-Module Content Structure
+### 1. Docusaurus Sidebar Configuration for Chapter Names
+**Decision**: Configure `sidebars.ts` to display specific chapter names: "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers"
+**Rationale**: The feature specification requires exact chapter names in the sidebar navigation as per FR-022 and User Story 2 acceptance scenarios. The `sidebars.ts` file must be updated to list these specific names for proper navigation.
+**Implementation approach**: Update the `sidebars.ts` file to explicitly list the chapter items with the required names instead of using auto-generation that might use file names or frontmatter titles.
+
+### 2. Docusaurus Multi-Module Content Structure
 
 **Decision**: Single project structure with content in `book-site/docs/module-X/`
 **Rationale**: The `plan.md` specifies a "Single project" structure where Docusaurus generates a static site. Content for each module will reside in `book-site/docs/module-X/` as Markdown files, with Docusaurus configuration in `book-site/` at the repository root. This approach is consistent with Docusaurus best practices for organizing multi-module content within a single instance.

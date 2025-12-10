@@ -7,7 +7,7 @@
 
 ## Summary
 
-This feature involves creating comprehensive chapters for Modules 1, 2, 3, and 4 covering ROS 2 fundamentals to advanced topics. This includes detailed installation commands, sample code, and step-by-step tutorials, all hosted on a Docusaurus static site and deployed via GitHub Pages.
+This feature involves creating comprehensive chapters for Modules 1, 2, 3, and 4 covering ROS 2 fundamentals to advanced topics. This includes detailed installation commands, sample code, and step-by-step tutorials, all hosted on a Docusaurus static site and deployed via GitHub Pages. Additionally, this plan includes updating the sidebar navigation to display specific chapter names: "Architecture", "Communication", "Packages", "Launch", "URDF", and "Controllers" as specified in the feature requirements.
 
 ## Technical Context
 
@@ -24,6 +24,7 @@ This feature involves creating comprehensive chapters for Modules 1, 2, 3, and 4
 - Must use existing Docusaurus 3.x installation.
 - Content files must be placed in `book-site/docs/module-X/` directory structure (where X is module number).
 - Each chapter must be a separate Markdown file.
+- Sidebar configuration in `book-site/sidebars.ts` must display exact chapter names: "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers".
 - No backend server required (static site generation only).
 - Deployment to GitHub Pages.
 - Installation commands target Ubuntu 22.04 LTS and ROS 2 Humble.
@@ -36,7 +37,7 @@ This feature involves creating comprehensive chapters for Modules 1, 2, 3, and 4
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-Based on the current feature specification and the expanded scope to include Modules 2, 3, and 4, the plan aligns with all principles outlined in the project's constitution. The modular approach to content organization (`book-site/docs/module-X/`) ensures adherence to Simplicity and Minimalism despite the increased scope.
+Based on the current feature specification and the requirement to update sidebar chapter names to "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers", the plan aligns with all principles outlined in the project's constitution. The specific naming approach ensures Student-Focused Clarity and Consistency in Formatting and Terminology as required by the constitution. The modular approach to content organization (`book-site/docs/module-X/`) ensures adherence to Simplicity and Minimalism despite the increased scope.
 
 ## Project Structure
 
@@ -57,22 +58,30 @@ specs/002-module-1-ros2-content/
 book-site/
 ├── docs/
 │   ├── module-1/
-│   │   └── chapter-1.md
-│   │   └── chapter-2.md
-│   │   └── ...
+│   │   ├── _category_.json  # Docusaurus category metadata for Module 1
+│   │   ├── index.md         # Module 1 overview page
+│   │   ├── architecture.md  # Chapter 1: Architecture
+│   │   ├── communication.md # Chapter 2: Communication
+│   │   ├── packages.md      # Chapter 3: Packages
+│   │   ├── launch.md        # Chapter 4: Launch
+│   │   ├── urdf.md          # Chapter 5: URDF
+│   │   └── controllers.md   # Chapter 6: Controllers
 │   ├── module-2/
-│   │   └── chapter-1.md
+│   │   ├── _category_.json  # Docusaurus category metadata for Module 2
+│   │   ├── index.md         # Module 2 overview page
 │   │   └── ...
 │   ├── module-3/
-│   │   └── chapter-1.md
+│   │   ├── _category_.json  # Docusaurus category metadata for Module 3
+│   │   ├── index.md         # Module 3 overview page
 │   │   └── ...
 │   └── module-4/
-│       └── chapter-1.md
+│       ├── _category_.json  # Docusaurus category metadata for Module 4
+│       ├── index.md         # Module 4 overview page
 │       └── ...
 ├── src/
 │   ├── components/       # Docusaurus React components (if any custom UI)
 │   └── pages/            # Docusaurus custom pages (if any)
-├── sidebars.ts           # Docusaurus sidebar configuration
+├── sidebars.ts           # Docusaurus sidebar configuration - specifies chapter names: "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers"
 └── docusaurus.config.ts  # Docusaurus main configuration
 
 ```

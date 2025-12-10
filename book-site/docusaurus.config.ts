@@ -94,7 +94,7 @@ const config: Config = {
             },
             {
               label: 'Module 2: Digital Twin',
-              to: '/module-2-digital-twin',
+              to: '/module-2',
             },
             {
               label: 'Module 3: NVIDIA Isaac',

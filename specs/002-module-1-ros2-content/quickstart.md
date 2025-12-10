@@ -62,8 +62,8 @@ The generated static files will be placed in the `book-site/build/` directory.
 ## 5. Adding New Content
 
 *   **Modules**: Create new directories under `book-site/docs/` (e.g., `book-site/docs/module-X/`).
-*   **Chapters**: Create Markdown (`.md`) files within module directories (e.g., `book-site/docs/module-X/chapter-Y.md`).
-*   **Sidebar**: Update `book-site/sidebars.ts` to include new modules and chapters.
+*   **Chapters**: Create Markdown (`.md`) files within module directories (e.g., `book-site/docs/module-X/architecture.md`, `book-site/docs/module-X/communication.md`, etc.).
+*   **Sidebar**: Update `book-site/sidebars.ts` to include new modules and chapters with specific names: "Architecture", "Communication", "Packages", "Launch", "URDF", "Controllers".
 
 ## 6. Deployment
 
