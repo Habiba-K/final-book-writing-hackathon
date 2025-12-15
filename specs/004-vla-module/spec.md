@@ -26,25 +26,25 @@ Target audience:
 
 ## Chapter Content
 
-17. Voice to Intent (Whisper)
+17. Voice to Intent
 
-Speech input → Whisper transcription → Basic intent extraction.
+Speech → text → intent.
 
 18. NL to ROS 2 Actions
 
-Convert natural language to task plans and ROS 2 action commands.
+Prompts → plans → commands.
 
 19. Multi-Modal Perception
 
-Fuse vision + language for object context and scene understanding.
+Vision–language fused understanding.
 
 20. Autonomous Task Execution
 
-Sequence tasks, monitor progress, and recover from simple errors.
+Plan, act, monitor, recover.
 
 21. Capstone Integration
 
-Connect full VLA pipeline and test in simulation on a humanoid.
+Full VLA humanoid pipeline..
 
 ## Constraints
 - Short, theory-focused content; only 1 example if needed
